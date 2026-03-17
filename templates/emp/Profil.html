@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>My Profile</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+{% include 'emp/navbar.html' %}
+
+<div class="container mt-4">
+
+  <h2 class="text-center">My Profile</h2>
+
+  <div class="card mt-4">
+    <div class="card-body">
+
+      <p><strong>Name:</strong> {{ emp.name }}</p>
+      <p><strong>ID:</strong> {{ emp.emp_id }}</p>
+      <p><strong>Phone:</strong> {{ emp.phone }}</p>
+      <p><strong>Department:</strong> {{ emp.department }}</p>
+      <p><strong>Salary:</strong> {{ emp.salary }}</p>
+
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

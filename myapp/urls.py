@@ -15,13 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import *
 import emp.views as fun
+from django.contrib.auth import views as auth_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("",fun.emp_home),
-    path("index/",fun.emp_home),
-    # path("about/",about),
-    # path("services/",services),
-    path("emp/",include('emp.urls'))
+    path("", fun.emp_home),
+    path("index/", fun.emp_home),
+    # path("about/", about),
+    # path("services/", services),
+    path("emp/", include('emp.urls')),  # <-- khassha comma hna
+    # Login/logout f root (ma f emp)
+    path('login/', auth_views.LoginView.as_view(template_name='emp/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='/login/'), name='logout'),
 ]

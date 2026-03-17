@@ -1,16 +1,16 @@
-from email.policy import default
-from unittest.util import _MAX_LENGTH
 from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
 class Emp(models.Model):
-    name=models.CharField(max_length=200)
-    emp_id=models.CharField(max_length=200)
-    phone=models.CharField(max_length=10)
-    address=models.CharField(max_length=150)
-    working=models.BooleanField(default=True)
-    department=models.CharField(max_length=200)
-    salary = models.IntegerField(default=0)  # <-- هاد العمود
-    
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+
+    name = models.CharField(max_length=200)
+    emp_id = models.CharField(max_length=200)
+    phone = models.CharField(max_length=10)
+    address = models.CharField(max_length=150)
+    working = models.BooleanField(default=True)
+    department = models.CharField(max_length=200)
+    salary = models.IntegerField(default=0)
+
     def __str__(self):
         return self.name

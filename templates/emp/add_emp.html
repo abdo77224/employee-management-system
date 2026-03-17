@@ -1,114 +1,69 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Add Employee Details</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-  </head>
-  <body>
-    {% include 'emp/navbar.html' %}
-    <h1 class="text-center my-3">Add New Employee</h1>
+<head>
+  <meta charset="utf-8">
+  <title>Add Employee</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
 
-    <div class="container">
-        <div class="row">
-          <div class="col-md-6 offset-md-3">
-            <div class="card bg-light text-black">
-              <div class="card-body">
-                <form action="/emp/add-emp/" method="POST">
-                  {% csrf_token %}
+<body>
 
-                  <!--Employee Name-->
-                  <div class="mb-3">
-                    <label for="name">Employee Name</label>
-                    <input
-                      id="name"
-                      type="text"
-                      class="form-control"
-                      placeholder="Enter Employee Name"
-                      name="emp_name"
-                    />
-                  </div>
+{% include 'emp/navbar.html' %}
 
-                  <!--Employee ID-->
-                  <div class="mb-3">
-                    <label for="id">Employee ID</label>
-                    <input
-                      id="id"
-                      type="text"
-                      class="form-control"
-                      placeholder="Enter Employee ID"
-                      name="emp_id"
-                    />
-                  </div>
+<div class="container mt-4">
+  <h2 class="text-center">Add Employee</h2>
 
-                  <!--Phone Number-->
-                  <div class="mb-3">
-                    <label for="phone">Phone</label>
-                    <input
-                      id="phone"
-                      type="text"
-                      class="form-control"
-                      placeholder="Enter Employee Phone"
-                      name="emp_phone"
-                    />
-                  </div>
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <form method="POST">
+        {% csrf_token %}
 
-                  <!--Employee Address-->
-                  <div class="mb-3">
-                    <label for="address">Employee Address</label>
-                    <textarea
-                      name="emp_address"
-                      id="address"
-                      rows="4"
-                      class="form-control"
-                      placeholder="Enter Address"
-                    ></textarea>
-                  </div>
-
-                  <!--Working Status-->
-                  <div class="mb-3 form-check">
-                    <label for="working">Working Status</label>
-                    <input id="working" name="emp_working" type="checkbox" class="form-check-input">
-                  </div>
-
-                  <!--Departments-->
-                  <div class="mb-3">
-                    <label for="department">Departments</label>
-                    <select name="emp_department" id="department" class="form-control">
-                        <option value="CSE">Computer Science</option>
-                        <option value="ME">Mechanical Engineering</option>
-                        <option value="EE">Electrical Engineering</option>
-                        <option value="CE">Civil Engineering</option>
-                    </select>
-                  </div>
-
-                  <!--Salary-->
-                  <div class="mb-3">
-                    <label for="salary">Salary</label>
-                    <input
-                      id="salary"
-                      type="number"
-                      class="form-control"
-                      placeholder="Enter Salary"
-                      name="emp_salary"
-                      min="0"
-                    />
-                  </div>
-
-                  <!--Add Employee Button-->
-                  <div class="container text-center">
-                      <button class="btn" style="background-color: #39B5E0;">
-                          Add Employee
-                      </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+        <div class="mb-3">
+          <label>Name</label>
+          <input type="text" name="emp_name" class="form-control">
         </div>
-      </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-  </body>
+        <div class="mb-3">
+          <label>ID</label>
+          <input type="text" name="emp_id" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <label>Phone</label>
+          <input type="text" name="emp_phone" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <label>Address</label>
+          <textarea name="emp_address" class="form-control"></textarea>
+        </div>
+
+        <div class="mb-3 form-check">
+          <input type="checkbox" name="emp_working" class="form-check-input">
+          <label class="form-check-label">Working</label>
+        </div>
+
+        <div class="mb-3">
+          <label>Department</label>
+          <select name="emp_department" class="form-control">
+            <option value="IT">IT</option>
+            <option value="HR">HR</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label>Salary</label>
+          <input type="number" name="emp_salary" class="form-control">
+        </div>
+
+        <div class="text-center">
+          <button class="btn btn-success">Add</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
 </html>

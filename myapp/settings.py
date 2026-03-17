@@ -140,3 +140,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = os.path.join(BASE_DIR,'static'),
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
+LOGIN_URL = '/login/'         # أي صفحة خاصة بغيت قبل login
+LOGIN_REDIRECT_URL = '/emp/home/'   # بعد login, RH ghadi l home
+LOGOUT_REDIRECT_URL = '/login/'     # بعد logout

@@ -1,22 +1,37 @@
-<nav class="navbar navbar-expand-lg" style="background-color: #39B5E0;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/emp/home/">Employee Management System</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-              aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          {% comment %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Employee Management</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+
+        {% if user.is_staff %}
+          <!-- RH navbar -->
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/emp/home/">Home</a>
-          </li> {% endcomment %}
+            <a class="nav-link" href="/emp/home/">Home</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="/emp/add-emp/">Add Employee</a>
           </li>
-          <li><a class="nav-link" href="/emp/home/">View Table</a></li>
-        </ul>
-      </div>
+        {% else %}
+          <!-- Employee navbar -->
+          <li class="nav-item">
+            <a class="nav-link" href="/emp/my-profile/">My Profile</a>
+          </li>
+        {% endif %}
+
+      </ul>
+
+      <!-- زر Logout يبقى ديما -->
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link btn btn-danger text-white" href="/logout/">Logout</a>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
