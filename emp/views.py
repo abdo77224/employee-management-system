@@ -16,8 +16,8 @@ def emp_home(request):
 # 🟢 PROFILE (Employee يشوف غير راسو)
 @login_required
 def my_profile(request):
-    emp = Emp.objects.get(user=request.user)
-    return render(request, "emp/profile.html", {'emp': emp})
+    emp = Emp.objects.get(user=request.user)  # فقط معلومات هذا المستخدم
+    return render(request, "emp/Profile.html", {'emp': emp})
 
 
 # 🟢 ADD EMPLOYEE (غير RH)
