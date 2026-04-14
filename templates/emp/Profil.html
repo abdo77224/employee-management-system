@@ -1,10 +1,18 @@
-<h2 class="text-center">My Profile</h2>
-<div class="card mt-4">
-  <div class="card-body">
-    <p><strong>Name:</strong> {{ emp.name }}</p>
-    <p><strong>ID:</strong> {{ emp.emp_id }}</p>
-    <p><strong>Phone:</strong> {{ emp.phone }}</p>
-    <p><strong>Department:</strong> {{ emp.department }}</p>
-    <p><strong>Salary:</strong> {{ emp.salary }}</p>
+<!-- emp/templates/emp/profile.html -->
+{% include 'emp/navbar.html' %}
+
+<div class="container mt-4">
+  <h2 class="text-center">My Profile</h2>
+
+  <div class="card mt-4">
+    <div class="card-body">
+      <p><strong>Name:</strong> {{ emp.name }}</p>
+      <p><strong>ID:</strong> {{ emp.emp_id }}</p>
+      <p><strong>Phone:</strong> {{ emp.phone }}</p>
+      <p><strong>Department:</strong> {{ emp.department }}</p>
+      <p><strong>Salary:</strong> {{ emp.salary }}</p>
+
+      <a href="{% url 'update_my_profile' %}" class="btn btn-success mt-3">Update Profile</a>
+    </div>
   </div>
 </div>
