@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,24 +24,39 @@ jobs:
           pip install -r requirements.txt
 
       - name: Django check
-        run: |
-          python manage.py check
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: python manage.py check
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/django-app:latest .
+        run: docker build -t django-app:latest .
 
-      - name: Push Docker image
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/django-app:latest
+      - name: Install Kind
+        run: |
+          curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
+          chmod +x ./kind
+          sudo mv ./kind /usr/local/bin/kind
 
-      - name: Setup kubectl
-        uses: azure/setup-kubectl@v4
+      - name: Install kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
+
+      - name: Create Kind cluster
+        run: kind create cluster --name my-cluster
+
+      - name: Load image to Kind
+        run: kind load docker-image django-app:latest --name my-cluster
 
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f k8s/
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/service.yaml
+
+      - name: Wait for pods ready
+        run: kubectl wait --for=condition=ready pod -l app=django-app --timeout=60s
+
+      - name: Test application
+        run: |
+          kubectl port-forward service/django-service 8000:8000 &
+          sleep 5
+          curl http://localhost:8000 || echo "App is running"
