@@ -12,3 +12,4 @@ urlpatterns = [
     path("do-update-emp/<int:emp_id>", do_update_emp, name="do_update_emp"),
 
 ]
+# hii 
